@@ -2,15 +2,19 @@ pipeline {
     agent any
 
     stages {
-        stage('Build') {
+        stage('Checkout') {
             steps {
-                echo "Build step here"
+                echo 'Code already checked out by Jenkins'
             }
         }
 
         stage('Deploy to Web Server') {
             steps {
-                echo "Deploy step here"
+                sshagent(['web-server-ssh']) {
+                    sh '''
+                      scp index.html ubuntu@172.31.27.91:/var/www/html/
+                    '''
+                }
             }
         }
     }
