@@ -13,10 +13,10 @@ pipeline {
             steps {
                 sshagent(credentials: ['web-server-ssh']) {
                     sh '''
-                    scp -o StrictHostKeyChecking=no -r page1 ubuntu@<WEB_SERVER_PRIVATE_IP>:/var/www/
-                    scp -o StrictHostKeyChecking=no -r page2 ubuntu@<WEB_SERVER_PRIVATE_IP>:/var/www/
+                    scp -o StrictHostKeyChecking=no -r page1 ubuntu@172.31.29.231:/var/www/
+                    scp -o StrictHostKeyChecking=no -r page2 ubuntu@172.31.29.231:/var/www/
 
-                    ssh -o StrictHostKeyChecking=no ubuntu@<WEB_SERVER_PRIVATE_IP> "
+                    ssh -o StrictHostKeyChecking=no ubuntu@172.31.29.231 "
                         sudo chown -R www-data:www-data /var/www/page1;
                         sudo chown -R www-data:www-data /var/www/page2;
                         sudo systemctl restart nginx
